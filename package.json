@@ -1,0 +1,17 @@
+{
+    "scripts": {
+        "ios:sim": "npm run ios:build:sim && npm run ios:install:sim && npm run ios:launch:sim",
+        "ios:build:sim": "xcodebuild -project ios/app.xcodeproj/ -scheme app -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 7 Plus,OS=10.0'",
+        "ios:install:sim": "xcrun simctl install D5CAC044-91B0-4556-B6AF-48AD0ADFFFCB ios/build/Products/Debug-iphonesimulator/app.app",
+        "ios:launch:sim": "xcrun simctl launch D5CAC044-91B0-4556-B6AF-48AD0ADFFFCB org.cross.mobile.app",
+        "ios:test:sim": "xcodebuild -project ios/app.xcodeproj/ -scheme app -destination 'platform=iOS Simulator,id=D5CAC044-91B0-4556-B6AF-48AD0ADFFFCB' test",
+        "xcode": "open ios/app.xcodeproj",
+        "android": "npm run android:build && npm run android:uninstall && npm run android:install && npm run android:launch",
+        "android:build": "android/gradlew build",
+        "android:uninstall": "adb uninstall org.cross.mobile.app -s emulator-5554",
+        "android:install": "adb install /Users/cankov/git/FireSt-dead/cross.mobile/android/app/build/outputs/apk/app-debug.apk -s emulator-5554",
+        "android:launch": "adb shell am start -c android.intent.category.LAUNCHER -n org.cross.mobile.app/.MainActivity",
+        "android:test": "android/gradlew test",
+        "start": "npm run android && npm run ios:sim"
+    }
+}
